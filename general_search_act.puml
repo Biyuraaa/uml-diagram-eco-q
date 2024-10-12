@@ -1,0 +1,22 @@
+@startuml Activity Diagram for General Search
+title Activity Diagram for General Search
+
+|User|
+start
+:opens the home page;
+:fills in search term;
+:clicks on "Search" button;
+
+|System|
+:validates search term;
+if (Search term valid?) then (yes)
+    :retrieves all relevant plants and events;
+    :displays search results;
+else (no)
+    :shows validation error message;
+    :User corrects the search term;
+    :repeats the search;
+endif
+
+stop
+@enduml

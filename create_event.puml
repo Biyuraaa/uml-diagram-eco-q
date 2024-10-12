@@ -1,0 +1,26 @@
+@startuml Create Event
+actor Admin
+actor System
+
+rectangle "Create New Event" {
+    (Open Form to Create Event) as OpenForm
+    (Fill in Event Details) as FillDetails
+    (Submit Form) as SubmitForm
+    (Validate Form) as ValidateForm
+    (Create Event) as CreateEvent
+    (Show Confirmation) as ShowConfirmation
+
+    OpenForm .-> FillDetails : <<include>>
+    FillDetails .right-> SubmitForm : <<include>>
+    SubmitForm .-> ValidateForm : <<include>>
+    ValidateForm .right-> CreateEvent : <<include>>
+    CreateEvent .-> ShowConfirmation : <<extend>>
+}
+
+Admin -right-> OpenForm : "Open"
+Admin -right-> FillDetails : "Fill in"
+Admin -right-> SubmitForm : "Submit"
+System -left-> ValidateForm : "Validate"
+System -left-> CreateEvent : "Create"
+System -left-> ShowConfirmation : "Show Confirmation"
+@enduml

@@ -1,0 +1,24 @@
+@startuml Activity Diagram for Adding a New Event
+title Activity Diagram for Adding a New Event
+
+|Admin|
+start
+:logs into the system;
+:navigates to "Add Event" page;
+:fills in event details \n(title, description, date, location);
+:submits the form;
+
+|System|
+:validates required fields \n(title, description, date, location);
+if (Validation passed?) then (yes)
+    :saves the new event details;
+    :associates the event with relevant gardens;
+    :redirects admin to the event details page;
+    :shows a success message;
+    stop
+else (no)
+    :shows validation errors;
+    :Admin corrects the input and submits again;
+    stop
+endif
+@enduml

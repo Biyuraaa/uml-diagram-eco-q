@@ -1,0 +1,31 @@
+@startuml Sequence Diagram for Deleting a Plant (Boundary, Controller, Entity)
+title Sequence Diagram for Deleting a Plant (Boundary, Controller, Entity)
+
+actor Admin
+boundary "Plant Details Page" as DetailsPage
+control "Plant Controller" as Controller
+entity "Plant Entity" as Plant
+database "Database" as DB
+
+skinparam style strictuml
+
+Admin -> DetailsPage : Navigate to plant details page
+DetailsPage -> Admin : Display plant information
+Admin -> DetailsPage : Click "Delete Plant" button
+DetailsPage -> Controller : Request to delete plant
+Controller -> Plant : Mark plant for deletion
+Plant -> DB : Validate plant existence
+DB -> Plant : Return validation result
+
+alt Validation Passed
+    Controller -> Plant : Delete plant record
+    Plant -> DB : Remove plant from database
+    DB -> Plant : Confirmation
+    Controller -> DetailsPage : Redirect to plant list page
+    DetailsPage -> Admin : Display success message
+else Validation Failed
+    Controller -> DetailsPage : Return validation errors
+    DetailsPage -> Admin : Display error messages
+end
+
+@enduml

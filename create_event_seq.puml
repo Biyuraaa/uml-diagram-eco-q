@@ -1,0 +1,33 @@
+@startuml Sequence Diagram for Adding a New Event (Boundary, Controller, Entity)
+title Sequence Diagram for Adding a New Event (Boundary, Controller, Entity)
+
+actor Admin
+boundary "Event Form" as EventForm
+control "Event Controller" as Controller
+entity "Event Entity" as Event
+database "Database" as DB
+
+skinparam style strictuml
+
+Admin -> EventForm : Navigate to "Add Event" page
+EventForm -> Admin : Display "Add Event" form
+Admin -> EventForm : Fill in event details
+Admin -> EventForm : Submit form
+EventForm -> Controller : Send event details
+Controller -> Event : Create new event object
+Event -> DB : Check for unique event title
+DB -> Event : Return event titles
+Event -> Controller : Return validation result
+
+alt Validation Passed
+    Controller -> Event : Save new event details
+    Event -> DB : Insert new event record
+    DB -> Event : Confirmation
+    Controller -> EventForm : Redirect to event details page
+    EventForm -> Admin : Display success message
+else Validation Failed
+    Controller -> EventForm : Return validation errors
+    EventForm -> Admin : Display error messages
+end
+
+@enduml

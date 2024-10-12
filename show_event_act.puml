@@ -1,0 +1,20 @@
+@startuml Activity Diagram for Viewing Event List
+title Activity Diagram for Viewing Event List
+
+|Admin|
+start
+:logs into the system;
+:navigates to "Manage Events" page;
+
+|System|
+:fetches list of events from the database;
+:displays the list of events;
+
+if (Events available?) then (yes)
+    :Admin reviews the event details;
+else (no)
+    :shows a message indicating no events found;
+endif
+
+stop
+@enduml

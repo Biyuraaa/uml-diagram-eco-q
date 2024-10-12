@@ -1,0 +1,24 @@
+@startuml Sequence Diagram for General Search
+title Sequence Diagram for General Search
+
+actor User
+boundary "Home Page" as HomePage
+control "Search Controller" as Controller
+entity "Plant Entity" as Plant
+database "Database" as DB
+
+skinparam style strictuml
+
+User -> HomePage : Open home page
+HomePage -> User : Display home page
+User -> HomePage : Enter search terms
+User -> HomePage : Click "Search" button
+HomePage -> Controller : Send search term
+Controller -> Plant : Search plants using search term
+Plant -> DB : Query all plants based on search term
+DB -> Plant : Return list of matching plants
+Plant -> Controller : Send search results
+Controller -> HomePage : Display search results
+HomePage -> User : Show list of matching plants
+
+@enduml

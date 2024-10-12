@@ -1,0 +1,23 @@
+@startuml Delete Plant
+actor Admin
+actor System
+
+rectangle "Delete Plant" {
+    (Select Plant to Delete) as SelectPlant
+    (Confirm Deletion) as ConfirmDeletion
+    (Request Deletion) as RequestDeletion
+    (Delete Plant) as DeletePlant
+    (Show Deletion Confirmation) as ShowConfirmation
+
+    SelectPlant .right-> ConfirmDeletion : <<include>>
+    ConfirmDeletion .-> RequestDeletion : <<include>>
+    RequestDeletion .-> DeletePlant : <<include>>
+    DeletePlant .-> ShowConfirmation : <<extend>>
+}
+
+Admin -right-> SelectPlant : "Select"
+Admin --right-> ConfirmDeletion : "Confirm"
+System -left-> RequestDeletion : "Request"
+System -left-> DeletePlant : "Delete"
+System -left-> ShowConfirmation : "Show Confirmation"
+@enduml

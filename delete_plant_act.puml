@@ -1,0 +1,28 @@
+@startuml Activity Diagram for Admin Deleting a Plant
+title Activity Diagram for Admin Deleting a Plant
+
+|Admin|
+start
+:logs into the system;
+:navigates to "Manage Plants" page;
+:selects the plant to delete;
+:confirms the deletion;
+
+|System|
+if (Deletion confirmed?) then (yes)
+    :validates deletion request;
+    :checks for dependencies (e.g., comments, events);
+    if (No dependencies?) then (yes)
+        :deletes the plant from the database;
+        :shows a success message;
+    else (no)
+        :shows error message \n(dependencies exist);
+    endif
+else (no)
+    :Admin cancels the deletion;
+    stop
+endif
+
+:redirects Admin to the plants list page;
+stop
+@enduml

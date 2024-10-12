@@ -1,0 +1,25 @@
+@startuml Activity Diagram for Editing an Event
+title Activity Diagram for Editing an Event
+
+|Admin|
+start
+:logs into the system;
+:navigates to "Edit Event" page;
+:selects an existing event;
+:loads event details;
+:fills in updated event details \n(title, description, date, location);
+:submits the form;
+
+|System|
+:validates required fields \n(title, description, date, location);
+if (Validation passed?) then (yes)
+    :updates the event details;
+    :redirects admin to the event details page;
+    :shows a success message;
+    stop
+else (no)
+    :shows validation errors;
+    :Admin corrects the input and submits again;
+    stop
+endif
+@enduml

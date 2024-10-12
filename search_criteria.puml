@@ -1,0 +1,37 @@
+@startuml Search by Criteria
+actor User
+actor System
+
+rectangle "Search Plants by Criteria" {
+    (Open Home Page) as HomePage
+    (Select Plant Type) as SelectPlantType
+    (Select Usage Type) as SelectUsageType
+    (Select Location) as SelectLocation
+    (Select Planting Date) as SelectPlantingDate
+    (Submit Search Criteria) as SubmitSearch
+    (Validate Selection) as ValidateSelection
+    (Retrieve Search Results) as RetrieveResults
+    (Display Search Results) as DisplayResults
+    (Handle No Results) as HandleNoResults
+
+    HomePage .-> SelectPlantType : <<extend>>
+    HomePage .-> SelectUsageType : <<extend>>
+    HomePage .-> SelectLocation : <<extend>>
+    HomePage .-> SelectPlantingDate : <<extend>>
+    SubmitSearch .-> ValidateSelection : <<include>>
+    ValidateSelection .-> RetrieveResults : <<include>>
+    ValidateSelection .-> HandleNoResults : <<extend>>
+    RetrieveResults .-> DisplayResults : <<include>>
+}
+
+User -> HomePage : "Open Home Page"
+User -> SelectPlantType : "Select Plant Type"
+User -> SelectUsageType : "Select Usage Type"
+User -> SelectLocation : "Select Location"
+User -> SelectPlantingDate : "Select Planting Date"
+User -> SubmitSearch : "Submit Search"
+System -> ValidateSelection : "Check if at least one criterion is selected"
+System -> RetrieveResults : "Search Database by Criteria"
+System -> DisplayResults : "Show Matching Results"
+System -> HandleNoResults : "No Matching Results Found"
+@enduml

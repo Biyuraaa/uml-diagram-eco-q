@@ -1,0 +1,32 @@
+@startuml Sequence Diagram for Deleting an Event (Boundary, Controller, Entity)
+title Sequence Diagram for Deleting an Event (Boundary, Controller, Entity)
+
+actor Admin
+boundary "Event Details" as EventDetails
+control "Event Controller" as Controller
+entity "Event Entity" as Event
+database "Database" as DB
+
+skinparam style strictuml
+
+Admin -> EventDetails : Navigate to "Event Details" page
+EventDetails -> Admin : Display event information
+Admin -> EventDetails : Click "Delete Event" button
+EventDetails -> Controller : Request to delete event
+Controller -> Event : Retrieve event details
+Event -> DB : Check for existing event record
+DB -> Event : Return event record
+Event -> Controller : Send event details for confirmation
+
+alt Confirmation Received
+    Controller -> Event : Delete event object
+    Event -> DB : Remove event record
+    DB -> Event : Confirmation of deletion
+    Controller -> EventDetails : Redirect to event list page
+    EventDetails -> Admin : Display success message
+else Confirmation Not Received
+    Controller -> EventDetails : Return to event details page
+    EventDetails -> Admin : Display cancellation message
+end
+
+@enduml

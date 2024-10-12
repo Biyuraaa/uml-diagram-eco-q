@@ -1,0 +1,20 @@
+@startuml Download QR Code
+actor User
+actor System
+
+rectangle "Download QR Code" {
+    (Open Plant Details) as OpenPlantDetails
+    (Click Download QR Code Button) as ClickDownload
+    (Retrieve QR Code) as RetrieveQRCode
+    (Download QR Code) as DownloadQRCode
+
+    OpenPlantDetails .-> ClickDownload : <<include>>
+    ClickDownload .-> RetrieveQRCode : <<include>>
+    RetrieveQRCode .-> DownloadQRCode : <<include>>
+}
+
+User -> OpenPlantDetails : "Open Plant Details"
+User -> ClickDownload : "Click Download QR Code"
+System -> RetrieveQRCode : "Retrieve QR Code from Database"
+System -> DownloadQRCode : "Provide QR Code Download"
+@enduml

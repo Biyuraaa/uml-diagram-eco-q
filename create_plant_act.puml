@@ -1,0 +1,29 @@
+@startuml Activity Diagram for Admin Adding a New Plant
+title Activity Diagram for Admin Adding a New Plant
+
+|Admin|
+start
+:logs into the system;
+:navigates to "Add Plant" page;
+:fills in plant details \n(name, species, common name, etc.);
+:uploads plant image;
+:submits the form;
+|System|
+fork
+    :validates required fields \n(name, species, common name, etc.);
+    :validates image format and file size;
+fork again
+    :checks for unique plant name;
+endfork
+if (Validation passed?) then (yes)
+    :System saves the new plant details;
+    :System generates a QR code for the plant;
+    :System stores QR code in the database;
+    :System redirects admin to the plant details page;
+    :System shows a success message;
+    stop
+else (no)
+    :System shows validation errors;
+    :Admin corrects the input and submits again;
+    stop
+@enduml

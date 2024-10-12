@@ -1,0 +1,29 @@
+@startuml Edit Event
+actor Admin
+actor System
+
+rectangle "Edit Event" {
+    (Select Event to Edit) as SelectEvent
+    (Open Form with Event Details) as OpenForm
+    (Edit Event Details) as EditDetails
+    (Submit Changes) as SubmitChanges
+    (Validate Changes) as ValidateChanges
+    (Update Event) as UpdateEvent
+    (Show Update Confirmation) as ShowConfirmation
+
+    SelectEvent .-> OpenForm : <<include>>
+    OpenForm .right-> EditDetails : <<include>>
+    EditDetails .-> SubmitChanges : <<include>>
+    SubmitChanges .-> ValidateChanges : <<include>>
+    ValidateChanges .left-> UpdateEvent : <<include>>
+    UpdateEvent .-> ShowConfirmation : <<extend>>
+}
+
+Admin -right-> SelectEvent : "Select"
+Admin -right-> OpenForm : "Open"
+Admin -right-> EditDetails : "Edit"
+Admin -right-> SubmitChanges : "Submit"
+System -left-> ValidateChanges : "Validate"
+System -left-> UpdateEvent : "Update"
+System -left-> ShowConfirmation : "Show Confirmation"
+@enduml

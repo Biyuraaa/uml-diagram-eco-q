@@ -1,0 +1,24 @@
+@startuml Sequence Diagram for Searching Plants by Criteria
+title Sequence Diagram for Searching Plants by Criteria
+
+actor User
+boundary "Home Page" as HomePage
+control "Plant Controller" as Controller
+entity "Plant Entity" as Plant
+database "Database" as DB
+
+skinparam style strictuml
+
+User -> HomePage : Open home page
+HomePage -> User : Display home page
+User -> HomePage : Enter search criteria
+User -> HomePage : Click "Search" button
+HomePage -> Controller : Send search criteria
+Controller -> Plant : Search plants by criteria
+Plant -> DB : Query plants based on criteria
+DB -> Plant : Return list of matching plants
+Plant -> Controller : Send search results
+Controller -> HomePage : Display search results
+HomePage -> User : Show list of matching plants
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml Activity Diagram for Deleting an Event
+title Activity Diagram for Deleting an Event
+
+|Admin|
+start
+:logs into the system;
+:navigates to "Manage Events" page;
+:selects an existing event to delete;
+:confirms deletion action;
+
+|System|
+if (Confirmation received?) then (yes)
+    :removes the event from the database;
+    :redirects admin to the events list page;
+    :shows a success message;
+    stop
+else (no)
+    :cancels the deletion;
+    stop
+endif
+@enduml

@@ -1,0 +1,16 @@
+@startuml Show Event Details
+actor Admin
+actor System
+
+rectangle "Show Event Details" {
+    (Select Event to View) as SelectEvent
+    (Display Event Details) as DisplayDetails
+    (Request Event Details) as RequestDetails
+
+    SelectEvent .-> RequestDetails : <<include>>
+    RequestDetails .-> DisplayDetails : <<include>>
+}
+
+Admin -> SelectEvent : "Select Event"
+System -> DisplayDetails : "Show Details"
+@enduml

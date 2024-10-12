@@ -1,0 +1,22 @@
+@startuml Activity Diagram for Searching Plant by Criteria
+title Activity Diagram for Searching Plant by Criteria
+
+|User|
+start
+:opens the plant search page;
+:fills in search criteria (name, species, etc.);
+:clicks on "Search" button;
+
+|System|
+:validates search criteria;
+if (Criteria valid?) then (yes)
+    :retrieves plants matching the criteria;
+    :displays search results;
+else (no)
+    :shows validation error message;
+    :User corrects the criteria;
+    :repeats the search;
+endif
+
+stop
+@enduml

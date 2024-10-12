@@ -1,0 +1,21 @@
+@startuml Sequence Diagram for Viewing Event List
+title Sequence Diagram for Viewing Event List (Boundary, Controller, Entity)
+
+actor Admin
+boundary "Event List Page" as EventList
+control "Event Controller" as Controller
+entity "Event Entity" as Event
+database "Database" as DB
+
+skinparam style strictuml
+
+Admin -> EventList : Navigate to "Event List" page
+EventList -> Controller : Request event list
+Controller -> Event : Retrieve all events
+Event -> DB : Fetch all event records
+DB -> Event : Return list of events
+Event -> Controller : Send event list
+Controller -> EventList : Display event list
+EventList -> Admin : Show list of events
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml Create Plant
+actor Admin
+actor System
+
+rectangle "Create Plant" {
+    (Open Form to Create Plant) as OpenForm
+    (Fill in Plant Details) as FillDetails
+    (Submit Form) as SubmitForm
+    (Validate Form) as ValidateForm
+    (Generate QR Code) as GenerateQRCode
+    (Create Plant) as CreatePlant
+    (Confirm Submission) as ConfirmSubmission
+
+    OpenForm -.> FillDetails : <<include>>
+    FillDetails -.> SubmitForm : <<include>>
+    SubmitForm -.> ValidateForm : <<include>>
+    ValidateForm -.> GenerateQRCode : <<include>>
+    GenerateQRCode -.> CreatePlant : <<include>>
+    ValidateForm -.> ConfirmSubmission : <<extend>>
+}
+
+Admin -> OpenForm : "Open"
+Admin -> FillDetails : "Fill in"
+Admin -> SubmitForm : "Submit"
+System -> ValidateForm : "Validate"
+System -> GenerateQRCode : "Generate"
+System -> CreatePlant : "Create"
+System -> ConfirmSubmission : "Show Confirmation"
+@enduml

@@ -1,0 +1,17 @@
+@startuml Show Plant Details
+actor Admin
+actor System
+
+rectangle "Show Details Plant" {
+    (Select Plant) as SelectPlant
+    (Request Plant Details) as RequestDetails
+    (Display Plant Details) as DisplayDetails
+
+    SelectPlant .-> RequestDetails : <<include>>
+    RequestDetails .-> DisplayDetails : <<include>>
+}
+
+Admin -> SelectPlant : "Select"
+Admin -> RequestDetails : "Request"
+System -> DisplayDetails : "Display"
+@enduml

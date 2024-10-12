@@ -1,0 +1,28 @@
+@startuml Sequence Diagram for Downloading QR Code (Boundary, Controller, Entity)
+title Sequence Diagram for Downloading QR Code
+
+actor User
+boundary "Plant Detail Page" as PlantDetail
+control "Plant Controller" as Controller
+entity "Plant Entity" as Plant
+database "Database" as DB
+
+skinparam style strictuml
+
+User -> PlantDetail : Open plant detail page
+PlantDetail -> Controller : Request plant details
+Controller -> Plant : Retrieve plant information
+Plant -> DB : Fetch plant record
+DB -> Plant : Return plant details
+Plant -> Controller : Send plant information
+Controller -> PlantDetail : Display plant details
+User -> PlantDetail : Click "Download QR Code" button
+PlantDetail -> Controller : Request QR code for the plant
+Controller -> Plant : Retrieve QR code
+Plant -> DB : Fetch QR code from database
+DB -> Plant : Return QR code
+Plant -> Controller : Send QR code
+Controller -> PlantDetail : Provide QR code for download
+PlantDetail -> User : Initiate QR code download
+
+@enduml

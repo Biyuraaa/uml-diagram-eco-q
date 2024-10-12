@@ -1,0 +1,41 @@
+@startuml Sequence Diagram for Adding a New Plant (Boundary, Controller, Entity)
+title Sequence Diagram for Adding a New Plant (Boundary, Controller, Entity)
+
+
+actor Admin
+boundary "Plant Form" as Form
+control "Plant Controller" as Controller
+entity "Plant Entity" as Plant
+database "Database" as DB
+control "QR Code Generator" as QR
+
+skinparam style strictuml
+
+Admin -> Form : Navigate to "Add Plant" page
+Form -> Admin : Display "Add Plant" form
+Admin -> Form : Fill in plant details
+Admin -> Form : Upload plant image
+Admin -> Form : Submit form
+Form -> Controller : Send plant details
+Controller -> Plant : Create new plant object
+Plant -> DB : Check for unique plant name
+DB -> Plant : Return plant names
+Plant -> Controller : Return validation result
+
+alt Validation Passed
+    Controller -> Plant : Save new plant details
+    Plant -> DB : Insert new plant record
+    DB -> Plant : Confirmation
+    Controller -> QR : Generate QR code for plant
+    QR -> Controller : Return QR code
+    Controller -> Plant : Save QR code in entity
+    Plant -> DB : Update plant record with QR code
+    DB -> Plant : Confirmation
+    Controller -> Form : Redirect to plant details page
+    Form -> Admin : Display success message
+else Validation Failed
+    Controller -> Form : Return validation errors
+    Form -> Admin : Display error messages
+end
+
+@enduml

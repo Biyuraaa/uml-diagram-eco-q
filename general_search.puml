@@ -1,0 +1,26 @@
+@startuml General Search
+actor User
+actor System
+
+rectangle "General Search" {
+    (Open Home Page) as HomePage
+    (Enter Search Keyword) as EnterKeyword
+    (Submit Search) as SubmitSearch
+    (Retrieve Search Results) as RetrieveResults
+    (Display Search Results) as DisplayResults
+    (Handle No Results) as HandleNoResults
+
+    HomePage .-> EnterKeyword : <<include>>
+    EnterKeyword .-> SubmitSearch : <<include>>
+    SubmitSearch .-> RetrieveResults : <<include>>
+    RetrieveResults .-> DisplayResults : <<include>>
+    RetrieveResults .-> HandleNoResults : <<extend>>
+}
+
+User -> HomePage : "Open Home Page"
+User -> EnterKeyword : "Enter Keyword"
+User -> SubmitSearch : "Submit Search"
+System -> RetrieveResults : "Search Database with Keyword"
+System -> DisplayResults : "Show Matching Results"
+System -> HandleNoResults : "No Matching Results Found"
+@enduml

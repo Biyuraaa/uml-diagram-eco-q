@@ -1,0 +1,20 @@
+@startuml Delete Event
+actor Admin
+actor System
+
+rectangle "Delete Event" {
+    (Select Event to Delete) as SelectEvent
+    (Confirm Deletion) as ConfirmDeletion
+    (Delete Event) as DeleteEvent
+    (Show Deletion Confirmation) as ShowConfirmation
+
+    SelectEvent .-> ConfirmDeletion : <<include>>
+    ConfirmDeletion .left-> DeleteEvent : <<include>>
+    DeleteEvent .-> ShowConfirmation : <<extend>>
+}
+
+Admin -right-> SelectEvent : "Select"
+Admin -right-> ConfirmDeletion : "Confirm"
+System -left-> DeleteEvent : "Delete"
+System -left-> ShowConfirmation : "Show Confirmation"
+@enduml

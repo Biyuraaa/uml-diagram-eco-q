@@ -1,0 +1,17 @@
+@startuml Activity Diagram for Downloading QR Code
+title Activity Diagram for Downloading QR Code
+
+|User|
+start
+:opens the desired plant details page;
+:clicks on "Download QR Code" button;
+
+|System|
+:fetches QR Code from the database;
+:provides QR Code for download;
+
+|User|
+:downloads QR Code to their device;
+
+stop
+@enduml

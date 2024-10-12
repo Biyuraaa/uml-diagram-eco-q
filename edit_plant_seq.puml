@@ -1,0 +1,33 @@
+@startuml Sequence Diagram for Editing Plant Information (Boundary, Controller, Entity)
+title Sequence Diagram for Editing Plant Information (Boundary, Controller, Entity)
+
+actor Admin
+boundary "Edit Plant Form" as EditForm
+control "Plant Controller" as Controller
+entity "Plant Entity" as Plant
+database "Database" as DB
+
+skinparam style strictuml
+
+Admin -> EditForm : Navigate to "Edit Plant" page
+EditForm -> Admin : Display current plant details
+Admin -> EditForm : Update plant information
+Admin -> EditForm : Submit updated form
+EditForm -> Controller : Send updated plant details
+Controller -> Plant : Update existing plant object
+Plant -> DB : Validate and retrieve plant record
+DB -> Plant : Return existing plant details
+Plant -> Controller : Return validation result
+
+alt Validation Passed
+    Controller -> Plant : Save updated plant details
+    Plant -> DB : Update plant record
+    DB -> Plant : Confirmation
+    Controller -> EditForm : Redirect to plant details page
+    EditForm -> Admin : Display success message
+else Validation Failed
+    Controller -> EditForm : Return validation errors
+    EditForm -> Admin : Display error messages
+end
+
+@enduml

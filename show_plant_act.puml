@@ -1,0 +1,15 @@
+@startuml Activity Diagram for Viewing Plant Details
+title Activity Diagram for Viewing Plant Details
+
+|User|
+start
+:navigates to "Plants" page;
+:selects a specific plant to view;
+
+|System|
+:retrieves plant details from the database;
+:displays plant information \n(name, species, common name, usages, etc.);
+:displays related information \n(comments, images, QR code);
+
+stop
+@enduml

@@ -1,0 +1,32 @@
+@startuml Activity Diagram for Admin Editing Plant Information
+title Activity Diagram for Admin Editing Plant Information
+
+|Admin|
+start
+:logs into the system;
+:navigates to "Edit Plant" page;
+:selects the plant to edit;
+:retrieves existing plant details;
+
+:edits plant details \n(name, species, common name, etc.);
+:uploads new plant image (if applicable);
+:submits the updated form;
+
+|System|
+fork
+    :validates required fields \n(name, species, common name, etc.);
+    :validates image format  \nand file size (if uploaded);
+fork again
+    :checks for unique plant name;
+endfork
+
+if (Validation passed?) then (yes)
+    :updates the plant details;
+    :redirects admin to the plant details page;
+    :shows a success message;
+    stop
+else (no)
+    :shows validation errors;
+    :Admin corrects the input and submits again;
+    stop
+@enduml

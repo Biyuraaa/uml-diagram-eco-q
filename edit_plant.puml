@@ -1,0 +1,25 @@
+@startuml Edit Plant
+actor Admin
+actor System
+rectangle "Edit Plant" {
+    (Open Form to Edit Plant) as OpenForm
+    (Fill in Updated Plant Details) as FillDetails
+    (Submit Edit Form) as SubmitForm
+    (Validate Updated Details) as ValidateForm
+    (Update Plant Information) as UpdatePlant
+    (Confirm Update) as ConfirmUpdate
+
+    OpenForm .left-> FillDetails : <<include>>
+    FillDetails .-> SubmitForm : <<include>>
+    SubmitForm .-> ValidateForm : <<include>>
+    ValidateForm .right-> UpdatePlant : <<include>>
+    UpdatePlant .-> ConfirmUpdate : <<extend>>
+}
+
+Admin -right-> OpenForm : "Open"
+Admin -right-> FillDetails : "Fill in"
+Admin -right-> SubmitForm : "Submit"
+System -left-> ValidateForm : "Validate"
+System -left-> UpdatePlant : "Update"
+System -left-> ConfirmUpdate : "Show Confirmation"
+@enduml

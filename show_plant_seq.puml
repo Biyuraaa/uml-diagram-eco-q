@@ -1,0 +1,21 @@
+@startuml Sequence Diagram for Deleting a Plant (Boundary, Controller, Entity)
+title Sequence Diagram for Viewing Plant Details (Boundary, Controller, Entity)
+
+actor User
+boundary "Plant Details Page" as DetailsPage
+control "Plant Controller" as Controller
+entity "Plant Entity" as Plant
+database "Database" as DB
+
+skinparam style strictuml
+
+User -> DetailsPage : Navigate to plant details page
+DetailsPage -> Controller : Request plant details
+Controller -> Plant : Retrieve plant information
+Plant -> DB : Fetch plant details
+DB -> Plant : Return plant information
+Plant -> Controller : Provide plant details
+Controller -> DetailsPage : Display plant information
+DetailsPage -> User : Show plant details
+
+@enduml
