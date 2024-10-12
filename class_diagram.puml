@@ -1,0 +1,76 @@
+@startuml Class Diagram for Plant and Garden Management System
+title Class Diagram for Plant and Garden Management System
+
+class User {
+    +id: Long
+    +name: String
+    +email: String
+    +role: Integer
+}
+
+class Garden {
+    +id: Long
+    +name: String
+    +location: String
+    +description: String
+}
+
+class Event {
+    +id: Long
+    +title: String
+    +description: String
+    +date: Date
+    +location: String
+}
+
+class Plant {
+    +id: Long
+    +name: String
+    +species: String
+    +common_name: String
+    +description: String
+    +usages: String
+    +habitat: String
+    +part_used: String
+    +chemical_compounds: String
+    +cultivation: String
+    +qr_image: Image
+    +image: Image
+}
+
+class Comment {
+    +id: Long
+    +content: String
+}
+
+class PharmacologyAspect {
+    +id: Long
+    +toxicity: String
+    +contraindications: String
+    +warnings: String
+    +precautions: String
+    +side_effects: String
+    +usage: String
+}
+
+class Classification {
+    +id: Long
+    +kingdom: String
+    +division: String
+    +class: String
+    +order: String
+    +family: String
+    +genus: String
+    +species: String
+}
+
+' Relationships
+User "1" -- "0..*" Comment : users_comments
+User "0..*" -- "0..*" Garden : users_gardens
+Garden "0..*" -- "0..*" Event : gardens_events
+Garden "0..*" -- "0..*" Plant : gardens_plants
+Plant "0..*" -- "0..*" Comment : comments_plants
+Plant "0..1" -- "1" PharmacologyAspect : plants_pharmacology_aspects
+Plant "0..1" -- "1" Classification : classifications_plants
+
+@enduml
